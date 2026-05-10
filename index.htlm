@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+    if(choice === result){
+        money += bet;
+        document.getElementById('taiXiuResult').innerHTML =
+        `🎉 Thắng! (${d1}-${d2}-${d3}) = ${total}`;
+    }else{
+        money -= bet;
+        document.getElementById('taiXiuResult').innerHTML =
+        `❌ Thua! (${d1}-${d2}-${d3}) = ${total}`;
+    }
+
+    updateMoney();
+}
+
+// XÓC ĐĨA
+function playXocDia(choice){
+    let bet = parseInt(document.getElementById('betXocDia').value);
+
+    if(!checkBet(bet)) return;
+
+    let reds = 0;
+
+    for(let i=0;i<4;i++){
+        if(Math.random() > 0.5) reds++;
+    }
+
+    let result = reds % 2 === 0 ? 'chan' : 'le';
+
+    if(choice === result){
+        money += bet;
+        document.getElementById('xocDiaResult').innerHTML =
+        `🎉 Thắng! Có ${reds} mặt đỏ`;
+    }else{
+        money -= bet;
+        document.getElementById('xocDiaResult').innerHTML =
+        `❌ Thua! Có ${reds} mặt đỏ`;
+    }
+
+    updateMoney();
+}
+
+// SLOT
+function playSlot(){
+    let bet = parseInt(document.getElementById('betSlot').value);
+
+    if(!checkBet(bet)) return;
+
+    let items = ['🍒','💎','7️⃣','⭐'];
+
+    let a = items[Math.floor(Math.random()*items.length)];
+    let b = items[Math.floor(Math.random()*items.length)];
+    let c = items[Math.floor(Math.random()*items.length)];
+
+    if(a===b && b===c){
+        money += bet*5;
+        document.getElementById('slotResult').innerHTML =
+        `🎉 JACKPOT ${a}${b}${c}`;
+    }else{
+        money -= bet;
+        document.getElementById('slotResult').innerHTML =
+        `❌ ${a}${b}${c}`;
+    }
+
+    updateMoney();
+}
+
+// TUNG XU
+function playCoin(choice){
+    let bet = parseInt(document.getElementById('betCoin').value);
+
+    if(!checkBet(bet)) return;
+
+    let result = Math.random() > 0.5 ? 'ngua' : 'sap';
+
+    document.getElementById('coin').innerText =
+    result === 'ngua' ? '🪙' : '⚫';
+
+    if(choice === result){
+        money += bet;
+        document.getElementById('coinResult').innerHTML = '🎉 Thắng';
+    }else{
+        money -= bet;
+        document.getElementById('coinResult').innerHTML = '❌ Thua';
+    }
+
+    updateMoney();
+}
+
+updateMoney();
+</script>
+
+</body>
+</html>
